@@ -2,6 +2,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test 'test/*.test.*'",
+    "build:licensed-client": "node scripts/build-licensed-local-client.mjs",
     "dev": "npx wrangler dev",
     "deploy": "npx wrangler deploy --minify",
     "license-admin": "node scripts/license-admin.mjs",

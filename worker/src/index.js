@@ -18,6 +18,7 @@ app.get("/", (c) => {
 });
 
 const MAX_WLOC_BYTES = 2 * 1024 * 1024;
+const AUTH_LEASE_SECONDS = 60;
 
 function jsonError(c, status, code, message = code) {
   return c.json({ success: false, error: code, message }, status);
@@ -86,6 +87,26 @@ app.post("/api/v1/patch", async (c) => {
   } catch (error) {
     console.error("wloc patch failed", error);
     return jsonError(c, 500, "PATCH_FAILED", "patch failed");
+  }
+});
+
+// Lightweight authorization for the local licensed client. The shortcut
+// primes this lease while saving coordinates, so the following WLOC response
+// can be patched locally without a large request/response round trip.
+app.post("/api/v1/authorize", async (c) => {
+  try {
+    const licenseKey = (c.req.header("Authorization") || "").replace(/^Bearer\s+/i, "");
+    const body = await c.req.json().catch(() => ({}));
+    const auth = await authorizeInstall(c.env.DB, licenseKey, body.installId);
+    if (!auth.ok) return jsonError(c, auth.status, auth.code);
+    const now = Math.floor(Date.now() / 1000);
+    return c.json({
+      success: true,
+      validUntil: now + AUTH_LEASE_SECONDS,
+    });
+  } catch (error) {
+    console.error("wloc authorize failed", error);
+    return jsonError(c, 500, "AUTHORIZE_FAILED", "authorization failed");
   }
 });
 

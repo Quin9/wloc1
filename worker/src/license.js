@@ -88,8 +88,8 @@ export function licensedModule({ origin, licenseKey }) {
 #!category=Tools
 
 [Script]
-Apple WLOC Licensed = type=http-response,pattern=^https?:\\/\\/(?:gs-loc(?:-cn)?\\.apple\\.com|gsp-ssl\\.ls\\.apple\\.com|bluedot\\.is\\.autonavi\\.com(?:\\.gds\\.alibabadns\\.com)?)\\/clls\\/wloc,requires-body=1,binary-body-mode=1,max-size=2097152,timeout=30,script-path=https://raw.githubusercontent.com/Quin9/wloc1/refs/heads/main/client/wloc-remote.js?v=20261003-1,argument=apiBase=${apiBase}&licenseKey=${licenseKey}&accuracy=25&randomRadius=0&logLevel=info
-WLOC Settings = type=http-request,pattern=^https?:\\/\\/gs-loc(-cn)?\\.apple\\.com\\/wloc-settings\\/save,requires-body=0,max-size=0,timeout=10,script-path=https://raw.githubusercontent.com/Quin9/wloc1/refs/heads/main/dist/wloc-settings.js
+Apple WLOC Licensed = type=http-response,pattern=^https?:\\/\\/(?:gs-loc(?:-cn)?\\.apple\\.com|gsp-ssl\\.ls\\.apple\\.com|bluedot\\.is\\.autonavi\\.com(?:\\.gds\\.alibabadns\\.com)?)\\/clls\\/wloc,requires-body=1,binary-body-mode=1,max-size=0,timeout=30,script-path=https://raw.githubusercontent.com/Quin9/wloc1/refs/heads/main/client/wloc-local-licensed.js?v=20261003-2,argument=apiBase=${apiBase}&licenseKey=${licenseKey}&longitude=113.94114&latitude=22.544577&accuracy=25&randomRadius=0&logLevel=info
+WLOC Settings Licensed = type=http-request,pattern=^https?:\\/\\/gs-loc(-cn)?\\.apple\\.com\\/wloc-settings\\/save,requires-body=0,max-size=0,timeout=15,script-path=https://raw.githubusercontent.com/Quin9/wloc1/refs/heads/main/client/wloc-settings-licensed.js?v=20261003-2,argument=apiBase=${apiBase}&licenseKey=${licenseKey}
 
 [MITM]
 hostname = %APPEND% gs-loc.apple.com, gs-loc-cn.apple.com, gsp-ssl.ls.apple.com, bluedot.is.autonavi.com, bluedot.is.autonavi.com.gds.alibabadns.com
