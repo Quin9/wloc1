@@ -1,5 +1,6 @@
 import { Hono } from "hono/tiny";
 import { getPageHtml } from "./page.js";
+import { getAdminPageHtml } from "./admin-page.js";
 import { parseCoords, gcj02ToWgs84, toWgs84, round6, inRange } from "./parse.js";
 import { applyRandomRadius, patchWlocBytes, validateSettings } from "./wloc-patch.js";
 import {
@@ -15,6 +16,15 @@ const app = new Hono();
 
 app.get("/", (c) => {
   return c.html(getPageHtml());
+});
+
+app.get("/admin", (c) => {
+  c.header("Cache-Control", "no-store");
+  c.header("X-Content-Type-Options", "nosniff");
+  c.header("X-Frame-Options", "DENY");
+  c.header("Referrer-Policy", "no-referrer");
+  c.header("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
+  return c.html(getAdminPageHtml());
 });
 
 const MAX_WLOC_BYTES = 2 * 1024 * 1024;
