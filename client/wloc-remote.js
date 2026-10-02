@@ -197,9 +197,13 @@
     log(`服务端修改成功: locations=${result.stats && result.stats.locations || 0}`);
     $done({
       response: {
-        status: $response.status || $response.statusCode || 200,
+        ...$response,
+        status: 200,
+        statusCode: 200,
         headers,
         body: patched,
+        bodyBytes: patched,
+        rawBody: patched,
       },
     });
   });

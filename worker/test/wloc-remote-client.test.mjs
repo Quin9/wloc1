@@ -55,6 +55,10 @@ test("licensed client applies an authorized server response", async () => {
     },
   });
   assert.deepEqual(Array.from(result.response.body), [9, 8, 7]);
+  assert.deepEqual(Array.from(result.response.bodyBytes), [9, 8, 7]);
+  assert.deepEqual(Array.from(result.response.rawBody), [9, 8, 7]);
+  assert.equal(result.response.status, 200);
+  assert.equal(result.response.statusCode, 200);
   assert.equal(result.response.headers["Content-Encoding"], undefined);
   assert.equal(result.response.headers["Content-Length"], "3");
 });

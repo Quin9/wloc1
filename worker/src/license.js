@@ -88,7 +88,7 @@ export function licensedModule({ origin, licenseKey }) {
 #!category=Tools
 
 [Script]
-Apple WLOC Licensed = type=http-response,pattern=^https?:\\/\\/(?:gs-loc(?:-cn)?\\.apple\\.com|gsp-ssl\\.ls\\.apple\\.com|bluedot\\.is\\.autonavi\\.com(?:\\.gds\\.alibabadns\\.com)?)\\/clls\\/wloc,requires-body=1,binary-body-mode=1,max-size=2097152,timeout=30,script-path=https://raw.githubusercontent.com/Quin9/wloc1/refs/heads/main/client/wloc-remote.js,argument=apiBase=${apiBase}&licenseKey=${licenseKey}&accuracy=25&randomRadius=0&logLevel=info
+Apple WLOC Licensed = type=http-response,pattern=^https?:\\/\\/(?:gs-loc(?:-cn)?\\.apple\\.com|gsp-ssl\\.ls\\.apple\\.com|bluedot\\.is\\.autonavi\\.com(?:\\.gds\\.alibabadns\\.com)?)\\/clls\\/wloc,requires-body=1,binary-body-mode=1,max-size=2097152,timeout=30,script-path=https://raw.githubusercontent.com/Quin9/wloc1/refs/heads/main/client/wloc-remote.js?v=20261003-1,argument=apiBase=${apiBase}&licenseKey=${licenseKey}&accuracy=25&randomRadius=0&logLevel=info
 WLOC Settings = type=http-request,pattern=^https?:\\/\\/gs-loc(-cn)?\\.apple\\.com\\/wloc-settings\\/save,requires-body=0,max-size=0,timeout=10,script-path=https://raw.githubusercontent.com/Quin9/wloc1/refs/heads/main/dist/wloc-settings.js
 
 [MITM]
