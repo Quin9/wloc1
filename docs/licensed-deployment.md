@@ -27,21 +27,10 @@ npx wrangler whoami
 ## 二、创建并绑定 D1
 
 ```bash
-npx wrangler d1 create wloc-license-db
+npx wrangler d1 create wloc-license-db --binding DB --location apac --update-config
 ```
 
-命令会返回 `database_id`。打开 `worker/wrangler.jsonc`，取消 `d1_databases` 整段注释并替换：
-
-```jsonc
-"d1_databases": [
-  {
-    "binding": "DB",
-    "database_name": "wloc-license-db",
-    "database_id": "这里填 Cloudflare 返回的 database_id",
-    "migrations_dir": "migrations"
-  }
-],
-```
+该命令会创建远程数据库，并把真实 `database_id` 自动写入 `worker/wrangler.jsonc`。执行后确认配置中出现未被注释的 `d1_databases`，且 binding 为 `DB`。如果你的 Wrangler 版本不支持 `--update-config`，使用命令输出的配置片段手动替换文件中注释掉的示例。
 
 应用数据库迁移：
 
